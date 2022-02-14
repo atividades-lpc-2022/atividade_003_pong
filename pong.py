@@ -68,7 +68,7 @@ def setup_hud() -> turtle.Turtle:
     hud.write(
         "Player 1: 0             :             Player 2: 0",
         align="center",
-        font=("Press Start 2P", 24, "normal"),
+        font=("Small Fonts", 24, "normal"),
     )
     return hud
 
@@ -109,7 +109,7 @@ def main():
         hud.write(
             f"Jogo inicia em {tic}",
             align="center",
-            font=("Press Start 2P", 24, "normal"),
+            font=("Small Fonts", 24, "normal"),
         )
         ball.dx = 0
         ball.dy = 0
@@ -122,7 +122,7 @@ def main():
     hud.write(
         "Player 1: {}             :             Player 2: {}".format(score_1, score_2),
         align="center",
-        font=("Press Start 2P", 24, "normal"),
+        font=("Small Fonts", 24, "normal"),
     )
 
     # sound effects
@@ -159,7 +159,7 @@ def main():
                     score_1, score_2
                 ),
                 align="center",
-                font=("Press Start 2P", 24, "normal"),
+                font=("Small Fonts", 24, "normal"),
             )
             ball.goto(0, 0)
             ball.dx *= -1
@@ -174,7 +174,7 @@ def main():
                     score_1, score_2
                 ),
                 align="center",
-                font=("Press Start 2P", 24, "normal"),
+                font=("Small Fonts", 24, "normal"),
             )
             ball.goto(0, 0)
             ball.dy *= 1
