@@ -56,6 +56,20 @@ def setup_ball() -> turtle.Turtle:
     ball.dy = 4
     return ball
 
+def setup_hud() -> turtle.Turtle:
+    hud = turtle.Turtle()
+    hud.speed(0)
+    hud.shape("square")
+    hud.color("white")
+    hud.penup()
+    hud.hideturtle()
+    hud.goto(0, 260)
+    hud.write(
+        "Player 1: 0             :             Player 2: 0",
+        align="center",
+        font=("Press Start 2P", 24, "normal"),
+    )
+    return hud
 
 def main():
     # draw screen
@@ -79,18 +93,7 @@ def main():
     score_2 = 0
 
     # head-up display
-    hud = turtle.Turtle()
-    hud.speed(0)
-    hud.shape("square")
-    hud.color("white")
-    hud.penup()
-    hud.hideturtle()
-    hud.goto(0, 260)
-    hud.write(
-        "Player 1: 0             :             Player 2: 0",
-        align="center",
-        font=("Press Start 2P", 24, "normal"),
-    )
+    hud = setup_hud()
 
     # keyboard
     screen.listen()
@@ -158,7 +161,9 @@ def main():
             )
             ball.goto(0, 0)
             ball.dx *= -1
-            winsound.PlaySound("258020__kodack__arcade-bleep-sound.wav", winsound.SND_ASYNC)
+            winsound.PlaySound(
+                "scoring.wav", winsound.SND_ASYNC
+            )
 
         # collision with right wall
         if ball.xcor() > 390:
@@ -174,23 +179,25 @@ def main():
             ball.goto(0, 0)
             ball.dy *= 1
             ball.dx *= -1
-            winsound.PlaySound("258020__kodack__arcade-bleep-sound.wav", winsound.SND_ASYNC)
+            winsound.PlaySound(
+                "scoring.wav", winsound.SND_ASYNC
+            )
 
         size_paddle_1 = 55
         size_paddle_2 = 55
 
         # collision with the paddle 1
         if (
-                ball.xcor() < -330 and not (ball.xcor() < -340)
+            ball.xcor() < -330 and not (ball.xcor() < -340)
         ) and paddle_1.ycor() + size_paddle_1 > ball.ycor() > paddle_1.ycor() - size_paddle_1:
             winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
             ball.goto(-330, ball.ycor())
             ball.dx *= -1
         elif (
-                paddle_1.ycor() + size_paddle_1
-                > ball.ycor()
-                > paddle_1.ycor() - size_paddle_1
-                and ball.xcor() < -330
+            paddle_1.ycor() + size_paddle_1
+            > ball.ycor()
+            > paddle_1.ycor() - size_paddle_1
+            and ball.xcor() < -330
         ):
             winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
             ball.dx *= -VELOCITY
@@ -200,7 +207,7 @@ def main():
 
         # collision with the paddle 2
         if (
-                ball.xcor() > 330 and not (ball.xcor() > 340)
+            ball.xcor() > 330 and not (ball.xcor() > 340)
         ) and paddle_2.ycor() + size_paddle_2 > ball.ycor() > paddle_2.ycor() - size_paddle_2:
             py_sound.load("bounce.wav")
             py_sound.play()
@@ -209,10 +216,10 @@ def main():
             ball.goto(330, ball.ycor())
             ball.dx *= -VELOCITY
         elif (
-                paddle_2.ycor() + size_paddle_2
-                > ball.ycor()
-                > paddle_2.ycor() - size_paddle_2
-                and ball.xcor() > 330
+            paddle_2.ycor() + size_paddle_2
+            > ball.ycor()
+            > paddle_2.ycor() - size_paddle_2
+            and ball.xcor() > 330
         ):
             ball.dx *= -1
             ball.dy *= -1
