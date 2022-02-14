@@ -56,6 +56,7 @@ def setup_ball() -> turtle.Turtle:
     ball.dy = 4
     return ball
 
+
 def setup_hud() -> turtle.Turtle:
     hud = turtle.Turtle()
     hud.speed(0)
@@ -70,6 +71,7 @@ def setup_hud() -> turtle.Turtle:
         font=("Press Start 2P", 24, "normal"),
     )
     return hud
+
 
 def main():
     # draw screen
@@ -161,9 +163,7 @@ def main():
             )
             ball.goto(0, 0)
             ball.dx *= -1
-            winsound.PlaySound(
-                "scoring.wav", winsound.SND_ASYNC
-            )
+            winsound.PlaySound("scoring.wav", winsound.SND_ASYNC)
 
         # collision with right wall
         if ball.xcor() > 390:
@@ -179,9 +179,7 @@ def main():
             ball.goto(0, 0)
             ball.dy *= 1
             ball.dx *= -1
-            winsound.PlaySound(
-                "scoring.wav", winsound.SND_ASYNC
-            )
+            winsound.PlaySound("scoring.wav", winsound.SND_ASYNC)
 
         size_paddle_1 = 55
         size_paddle_2 = 55
