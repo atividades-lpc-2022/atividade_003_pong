@@ -117,7 +117,7 @@ def main():
     hud.write(
         "Player 1: {}             :             Player 2: {}".format(score_1, score_2),
         align="center",
-        font=("Press Start 2P",24, "normal"),
+        font=("Press Start 2P", 24, "normal"),
     )
 
     # sound effects
@@ -181,16 +181,16 @@ def main():
 
         # collision with the paddle 1
         if (
-            ball.xcor() < -330 and not (ball.xcor() < -340)
+                ball.xcor() < -330 and not (ball.xcor() < -340)
         ) and paddle_1.ycor() + size_paddle_1 > ball.ycor() > paddle_1.ycor() - size_paddle_1:
             winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
             ball.goto(-330, ball.ycor())
             ball.dx *= -1
         elif (
-            paddle_1.ycor() + size_paddle_1
-            > ball.ycor()
-            > paddle_1.ycor() - size_paddle_1
-            and ball.xcor() < -330
+                paddle_1.ycor() + size_paddle_1
+                > ball.ycor()
+                > paddle_1.ycor() - size_paddle_1
+                and ball.xcor() < -330
         ):
             winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
             ball.dx *= -VELOCITY
@@ -200,7 +200,7 @@ def main():
 
         # collision with the paddle 2
         if (
-            ball.xcor() > 330 and not (ball.xcor() > 340)
+                ball.xcor() > 330 and not (ball.xcor() > 340)
         ) and paddle_2.ycor() + size_paddle_2 > ball.ycor() > paddle_2.ycor() - size_paddle_2:
             py_sound.load("bounce.wav")
             py_sound.play()
@@ -209,10 +209,10 @@ def main():
             ball.goto(330, ball.ycor())
             ball.dx *= -VELOCITY
         elif (
-            paddle_2.ycor() + size_paddle_2
-            > ball.ycor()
-            > paddle_2.ycor() - size_paddle_2
-            and ball.xcor() > 330
+                paddle_2.ycor() + size_paddle_2
+                > ball.ycor()
+                > paddle_2.ycor() - size_paddle_2
+                and ball.xcor() > 330
         ):
             ball.dx *= -1
             ball.dy *= -1
