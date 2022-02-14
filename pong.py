@@ -1,6 +1,8 @@
 from random import choice
 import turtle
 import time
+import pygame
+import winsound
 
 VELOCITY = 1.1
 
@@ -115,8 +117,12 @@ def main():
     hud.write(
         "Player 1: {}             :             Player 2: {}".format(score_1, score_2),
         align="center",
-        font=("Press Start 2P", 24, "normal"),
+        font=("Press Start 2P",24, "normal"),
     )
+
+    # sound effects
+    pygame.mixer.init()
+    py_sound = pygame.mixer.music
 
     while True:
         fps = 1 / 60
@@ -131,11 +137,13 @@ def main():
         if ball.ycor() > 290:
             ball.sety(290)
             ball.dy *= -1
+            winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
 
         # collision with lower wall
         if ball.ycor() < -290:
             ball.sety(-290)
             ball.dy *= -1
+            winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
 
         # collision with left wall
         if ball.xcor() < -390:
@@ -150,6 +158,7 @@ def main():
             )
             ball.goto(0, 0)
             ball.dx *= -1
+            winsound.PlaySound("258020__kodack__arcade-bleep-sound.wav", winsound.SND_ASYNC)
 
         # collision with right wall
         if ball.xcor() > 390:
@@ -165,6 +174,7 @@ def main():
             ball.goto(0, 0)
             ball.dy *= 1
             ball.dx *= -1
+            winsound.PlaySound("258020__kodack__arcade-bleep-sound.wav", winsound.SND_ASYNC)
 
         size_paddle_1 = 55
         size_paddle_2 = 55
@@ -173,6 +183,7 @@ def main():
         if (
             ball.xcor() < -330 and not (ball.xcor() < -340)
         ) and paddle_1.ycor() + size_paddle_1 > ball.ycor() > paddle_1.ycor() - size_paddle_1:
+            winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
             ball.goto(-330, ball.ycor())
             ball.dx *= -1
         elif (
@@ -181,6 +192,7 @@ def main():
             > paddle_1.ycor() - size_paddle_1
             and ball.xcor() < -330
         ):
+            winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
             ball.dx *= -VELOCITY
             ball.dy *= -1
             if ball.xcor() < -345:
@@ -190,6 +202,10 @@ def main():
         if (
             ball.xcor() > 330 and not (ball.xcor() > 340)
         ) and paddle_2.ycor() + size_paddle_2 > ball.ycor() > paddle_2.ycor() - size_paddle_2:
+            py_sound.load("bounce.wav")
+            py_sound.play()
+            pygame.time.wait(50)
+            py_sound.stop()
             ball.goto(330, ball.ycor())
             ball.dx *= -VELOCITY
         elif (
@@ -202,6 +218,10 @@ def main():
             ball.dy *= -1
             if ball.xcor() > 345:
                 ball.dx *= -1.1
+            py_sound.load("bounce.wav")
+            py_sound.play()
+            pygame.time.wait(50)
+            py_sound.stop()
 
 
 main()
